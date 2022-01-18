@@ -1,6 +1,8 @@
 pragma solidity ^0.8.0;
 
-contract Basket{
+import '@openzeppelin/contracts/access/Ownable.sol';
+
+contract Basket is Ownable{
 
     address Owner;
     constructor() {
