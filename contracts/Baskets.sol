@@ -6,7 +6,7 @@ contract Baskets is Ownable{
     event basketCreated(address owner, Basket basket);
 
     mapping (address=>Basket[]) creators; //mapping of creators to the baskets created by them
-    mapping (string=>Basket) uniqueBasketMapping; //mapping of basketId to Basket
+    mapping (string=>Basket) public uniqueBasketMapping; //mapping of basketId to Basket
 
     struct Basket {
         bool active;
@@ -48,6 +48,10 @@ contract Baskets is Ownable{
         require(msg.sender == uniqueBasketMapping[basketId].basketOwner, "you are not the owner of the basket");
         uniqueBasketMapping[basketId].basketOwner = _newOwner;
         emit OwnershipTransferred(msg.sender, _newOwner);
+    }
+
+    function isBucketActive(string memory id) external returns (bool) {
+        return uniqueBasketMapping[id].active;
     }
 
 }
